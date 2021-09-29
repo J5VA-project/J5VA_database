@@ -161,3 +161,99 @@ alter table dbo.favorite
 add constraint fk_fav_cus
 foreign key (customer_id)
 references dbo.customer(customer_id)
+
+
+----
+--dbo.size
+SET IDENTITY_INSERT dbo.size ON
+insert into dbo.size (size_id, name) values
+('1','small'),
+('2','medium'),
+('3','large')
+--dbo.foodCategory
+SET IDENTITY_INSERT dbo.size OFF
+SET IDENTITY_INSERT dbo.foodCategory ON
+insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) values
+('1','Dishes','no'),
+('2','Nuts & Green','no'),
+('3','Smoothies','no'),
+('4','Vegetables','no'),
+('5','Takeaway Pack','no'),
+('6','Fresh Fruits','no')
+--dbo.food
+SET IDENTITY_INSERT dbo.food ON
+insert into dbo.food (food_id, food_name, price, photo) values
+('1','Chicken In Teriyaki','22.35','feature-item-1.jpg'),
+('2','Hotdog With Sausage','30.35','feature-item-2.jpg'),
+('3','Breakfast With Sweet','52.35','feature-item-3.jpg'),
+('4','Grilled Chicken Stick','25.35','feature-item-4.jpg'),
+('5','Chicken Barista platter','32.35','feature-item-5.jpg'),
+('6','French Fries Pack','15.35','feature-item-6.jpg')
+--dbo.foodDetail
+SET IDENTITY_INSERT dbo.food OFF
+SET IDENTITY_INSERT dbo.foodDetail ON
+insert into dbo.foodDetail (food_id, category_id, status, description, size_id, image_title1, image_title2) values
+('1','1','1','no','1','feature-item-1.jpg','feature-item-1.jpg'),
+('2','1','1','no','2','feature-item-2.jpg','feature-item-2.jpg'),
+('3','4','1','no','1','feature-item-3.jpg','feature-item-3.jpg'),
+('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
+('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
+('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
+--dbo.customer
+insert into dbo.customer (customer_id, username, password, fullName, phone_No, address, email, image) values
+('1','vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
+('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','photo.jpg'),
+('3','phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','photo.jpg'),
+('4','phuocqd','123','Quach Diem Phuoc','0375578184','TP.HCM','phuocqd@gmail.com','photo.jpg'),
+('5','ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','photo.jpg'),
+('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','photo.jpg'),
+('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','photo.jpg'),
+('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','photo.jpg')
+--dbo.favorite
+SET IDENTITY_INSERT dbo.foodDetail OFF
+SET IDENTITY_INSERT dbo.favorite ON
+insert into dbo.favorite(favorite_id, food_id, customer_id) values
+('1','1','1'),
+('2','1','2'),
+('3','2','1'),
+('4','3','1')
+--dbo.account
+insert into dbo.account (account_id, username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
+('1','nv01','cannv','123','Nguyen Van Can','cannv@gmail.com','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
+('2','nv02','liempv','123','Pham Van Kiem','liempv@gmail.com','0375578191','2017/05/05','2700','1','1998/04/25','photo.jpg'),
+('3','nv03','liemtv','123','Tran Van Liem','liemtv@gmail.com','0375578192','2017/05/05','2300','1','1997/03/05','photo.jpg'),
+('4','nv04','chinhhv','123','Huynh Van Chinh','chinhhv@gmail.com','0375578193','2017/05/05','2200','1','1999/07/23','photo.jpg')
+--dbo.role
+SET IDENTITY_INSERT dbo.favorite OFF
+SET IDENTITY_INSERT dbo.role ON
+insert into dbo.role (role_id, role_name) values
+('1','Manager'),
+('2','Staff'),
+('3','Boss'),
+('4','Chef')
+--dbo.authorized
+SET IDENTITY_INSERT dbo.role OFF
+SET IDENTITY_INSERT dbo.authorized ON
+insert into dbo.authorized (authorized_id, account_id, role_id) values
+('1','1','1'),
+('2','2','2'),
+('3','3','3'),
+('4','4','4')
+--dbo.orders
+SET IDENTITY_INSERT dbo.authorized OFF
+SET IDENTITY_INSERT dbo.orders ON
+insert into dbo.orders (order_id, account_id, customer_id, orderDate, discount, status, address) values
+('1','2','1','2021/09/29','10','1','HCM'),
+('2','2','2','2021/09/29','10','1','HCM'),
+('3','2','3','2021/09/29','5','1','HCM'),
+('4','2','4','2021/09/29','10','1','HCM'),
+('5','2','1','2021/09/29','20','1','HCM')
+--dbo.orderDetail
+SET IDENTITY_INSERT dbo.orders OFF
+SET IDENTITY_INSERT dbo.orderDetail ON
+insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price) values
+('1','1','1','1','22.35'),
+('2','2','1','1','22.35'),
+('3','3','2','1','30.35'),
+('4','4','2','1','30.35'),
+('5','5','3','1','52.35')
