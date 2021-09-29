@@ -181,6 +181,8 @@ insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) v
 ('5','Takeaway Pack','no'),
 ('6','Fresh Fruits','no')
 --dbo.food
+SET IDENTITY_INSERT dbo.foodCategory OFF
+
 SET IDENTITY_INSERT dbo.food ON
 insert into dbo.food (food_id, food_name, price, photo) values
 ('1','Chicken In Teriyaki','22.35','feature-item-1.jpg'),
@@ -191,6 +193,7 @@ insert into dbo.food (food_id, food_name, price, photo) values
 ('6','French Fries Pack','15.35','feature-item-6.jpg')
 --dbo.foodDetail
 SET IDENTITY_INSERT dbo.food OFF
+
 SET IDENTITY_INSERT dbo.foodDetail ON
 insert into dbo.foodDetail (food_id, category_id, status, description, size_id, image_title1, image_title2) values
 ('1','1','1','no','1','feature-item-1.jpg','feature-item-1.jpg'),
@@ -199,6 +202,8 @@ insert into dbo.foodDetail (food_id, category_id, status, description, size_id, 
 ('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
 ('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
 ('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
+SET IDENTITY_INSERT dbo.foodDetail OFF
+
 --dbo.customer
 insert into dbo.customer (customer_id, username, password, fullName, phone_No, address, email, image) values
 ('1','vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
@@ -257,3 +262,5 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 ('3','3','2','1','30.35'),
 ('4','4','2','1','30.35'),
 ('5','5','3','1','52.35')
+
+select * from account
