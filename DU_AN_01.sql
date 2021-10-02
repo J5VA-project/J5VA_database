@@ -1,8 +1,10 @@
 create database du_an_01
 go
 use du_an_01
-
 go
+
+--drop database du_an_01
+
 create table dbo.customer
 (
 customer_id int primary key, 
@@ -162,6 +164,7 @@ add constraint fk_fav_cus
 foreign key (customer_id)
 references dbo.customer(customer_id)
 
+select * from size
 
 ----
 --dbo.size
@@ -181,6 +184,8 @@ insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) v
 ('5','Takeaway Pack','no'),
 ('6','Fresh Fruits','no')
 --dbo.food
+
+SET IDENTITY_INSERT dbo.foodCategory OFF
 SET IDENTITY_INSERT dbo.food ON
 insert into dbo.food (food_id, food_name, price, photo) values
 ('1','Chicken In Teriyaki','22.35','feature-item-1.jpg'),
@@ -199,16 +204,17 @@ insert into dbo.foodDetail (food_id, category_id, status, description, size_id, 
 ('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
 ('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
 ('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
+SELECT * FROM foodDetail
 --dbo.customer
 insert into dbo.customer (customer_id, username, password, fullName, phone_No, address, email, image) values
-('1','vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
-('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','photo.jpg'),
-('3','phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','photo.jpg'),
-('4','phuocqd','123','Quach Diem Phuoc','0375578184','TP.HCM','phuocqd@gmail.com','photo.jpg'),
-('5','ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','photo.jpg'),
-('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','photo.jpg'),
-('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','photo.jpg'),
-('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','photo.jpg')
+('1','vuongnm','123','Nguyen Minh Vuong','0375578180','Phan Thiet','vuongnm@gmail.com','vuongnm.jpg'),
+('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','dathx.jpg'),
+('3','phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','phucvh.jpg'),
+('4','phuocqd','123','Quach Diem Phuoc','0366533889','TP.HCM','phuocqd@gmail.com','phuocqd.jpg'),
+('5','ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','client-1.jpg'),
+('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','client-2.jpg'),
+('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','client-3.jpg'),
+('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','client-4.jpg')
 --dbo.favorite
 SET IDENTITY_INSERT dbo.foodDetail OFF
 SET IDENTITY_INSERT dbo.favorite ON
@@ -216,7 +222,11 @@ insert into dbo.favorite(favorite_id, food_id, customer_id) values
 ('1','1','1'),
 ('2','1','2'),
 ('3','2','1'),
-('4','3','1')
+('4','3','2'),
+('5','2','3'),
+('6','3','4'),
+('7','2','3'),
+('8','3','4')
 --dbo.account
 insert into dbo.account (account_id, username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
 ('1','nv01','cannv','123','Nguyen Van Can','cannv@gmail.com','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
@@ -257,3 +267,7 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 ('3','3','2','1','30.35'),
 ('4','4','2','1','30.35'),
 ('5','5','3','1','52.35')
+
+select * from customer
+select * from favorite
+select * from foodDetail
