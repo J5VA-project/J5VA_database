@@ -170,8 +170,8 @@ insert into dbo.size (size_id, name) values
 ('1','small'),
 ('2','medium'),
 ('3','large')
---dbo.foodCategory
 SET IDENTITY_INSERT dbo.size OFF
+--dbo.foodCategory
 SET IDENTITY_INSERT dbo.foodCategory ON
 insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) values
 ('1','Dishes','no'),
@@ -180,6 +180,7 @@ insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) v
 ('4','Vegetables','no'),
 ('5','Takeaway Pack','no'),
 ('6','Fresh Fruits','no')
+SET IDENTITY_INSERT dbo.foodCategory OFF
 --dbo.food
 SET IDENTITY_INSERT dbo.food ON
 insert into dbo.food (food_id, food_name, price, photo) values
@@ -189,8 +190,8 @@ insert into dbo.food (food_id, food_name, price, photo) values
 ('4','Grilled Chicken Stick','25.35','feature-item-4.jpg'),
 ('5','Chicken Barista platter','32.35','feature-item-5.jpg'),
 ('6','French Fries Pack','15.35','feature-item-6.jpg')
---dbo.foodDetail
 SET IDENTITY_INSERT dbo.food OFF
+--dbo.foodDetail
 SET IDENTITY_INSERT dbo.foodDetail ON
 insert into dbo.foodDetail (food_id, category_id, status, description, size_id, image_title1, image_title2) values
 ('1','1','1','no','1','feature-item-1.jpg','feature-item-1.jpg'),
@@ -199,7 +200,9 @@ insert into dbo.foodDetail (food_id, category_id, status, description, size_id, 
 ('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
 ('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
 ('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
+SET IDENTITY_INSERT dbo.foodDetail OFF
 --dbo.customer
+SET IDENTITY_INSERT dbo.customer ON
 insert into dbo.customer (customer_id, username, password, fullName, phone_No, address, email, image) values
 ('1','vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
 ('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','photo.jpg'),
@@ -209,38 +212,40 @@ insert into dbo.customer (customer_id, username, password, fullName, phone_No, a
 ('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','photo.jpg'),
 ('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','photo.jpg'),
 ('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','photo.jpg')
+SET IDENTITY_INSERT dbo.customer OFF
 --dbo.favorite
-SET IDENTITY_INSERT dbo.foodDetail OFF
 SET IDENTITY_INSERT dbo.favorite ON
 insert into dbo.favorite(favorite_id, food_id, customer_id) values
 ('1','1','1'),
 ('2','1','2'),
 ('3','2','1'),
 ('4','3','1')
---dbo.account
-insert into dbo.account (account_id, username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
-('1','nv01','cannv','123','Nguyen Van Can','cannv@gmail.com','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
-('2','nv02','liempv','123','Pham Van Kiem','liempv@gmail.com','0375578191','2017/05/05','2700','1','1998/04/25','photo.jpg'),
-('3','nv03','liemtv','123','Tran Van Liem','liemtv@gmail.com','0375578192','2017/05/05','2300','1','1997/03/05','photo.jpg'),
-('4','nv04','chinhhv','123','Huynh Van Chinh','chinhhv@gmail.com','0375578193','2017/05/05','2200','1','1999/07/23','photo.jpg')
---dbo.role
 SET IDENTITY_INSERT dbo.favorite OFF
+--dbo.account
+SET IDENTITY_INSERT dbo.account ON
+insert into dbo.account (account_id, username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
+('1','nv01','123','Nguyen Van Can','cannv@gmail.com','2 District','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
+('2','nv02','123','Pham Van Kiem','liempv@gmail.com','12 District','0375578191','2017/05/05','2700','1','1998/04/25','photo.jpg'),
+('3','nv03','123','Tran Van Liem','liemtv@gmail.com','11 District','0375578192','2017/05/05','2300','1','1997/03/05','photo.jpg'),
+('4','nv04','123','Huynh Van Chinh','chinhhv@gmail.com','10 District','0375578193','2017/05/05','2200','1','1999/07/23','photo.jpg')
+SET IDENTITY_INSERT dbo.account OFF
+--dbo.role
 SET IDENTITY_INSERT dbo.role ON
 insert into dbo.role (role_id, role_name) values
 ('1','Manager'),
 ('2','Staff'),
 ('3','Boss'),
 ('4','Chef')
---dbo.authorized
 SET IDENTITY_INSERT dbo.role OFF
+--dbo.authorized
 SET IDENTITY_INSERT dbo.authorized ON
 insert into dbo.authorized (authorized_id, account_id, role_id) values
 ('1','1','1'),
 ('2','2','2'),
 ('3','3','3'),
 ('4','4','4')
---dbo.orders
 SET IDENTITY_INSERT dbo.authorized OFF
+--dbo.orders
 SET IDENTITY_INSERT dbo.orders ON
 insert into dbo.orders (order_id, account_id, customer_id, orderDate, discount, status, address) values
 ('1','2','1','2021/09/29','10','1','HCM'),
@@ -248,8 +253,8 @@ insert into dbo.orders (order_id, account_id, customer_id, orderDate, discount, 
 ('3','2','3','2021/09/29','5','1','HCM'),
 ('4','2','4','2021/09/29','10','1','HCM'),
 ('5','2','1','2021/09/29','20','1','HCM')
---dbo.orderDetail
 SET IDENTITY_INSERT dbo.orders OFF
+--dbo.orderDetail
 SET IDENTITY_INSERT dbo.orderDetail ON
 insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price) values
 ('1','1','1','1','22.35'),
@@ -257,3 +262,6 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 ('3','3','2','1','30.35'),
 ('4','4','2','1','30.35'),
 ('5','5','3','1','52.35')
+SET IDENTITY_INSERT dbo.orderDetail OFF
+
+
