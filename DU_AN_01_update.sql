@@ -2,7 +2,7 @@ create database du_an_01
 go
 use du_an_01
 
-drop database du_an_01
+--drop database du_an_01
 
 go
 create table dbo.customer
