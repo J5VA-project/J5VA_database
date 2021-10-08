@@ -1,14 +1,13 @@
 create database du_an_01
 go
 use du_an_01
+
+drop database du_an_01
+
 go
-
---drop database du_an_01
-
 create table dbo.customer
 (
-customer_id int primary key, 
-username varchar(50) not null,
+username_custo varchar(50) primary key,
 password varchar(50) not null,
 fullName varchar(100) not null,
 phone_No varchar(15),
@@ -20,8 +19,7 @@ image varchar(255)
 go
 create table dbo.account
 (
-account_id int primary key,
-username varchar(50) not null,
+username varchar(50) primary key,
 password varchar(50) not null,
 fullname nvarchar(100),
 email varchar(100),
@@ -44,7 +42,7 @@ go
 create table dbo.authorized
 (
 authorized_id int primary key identity(1,1),
-account_id int not null,
+username varchar(50) not null,
 role_id int not null
 )
 go
@@ -74,7 +72,7 @@ create table dbo.favorite
 (
 favorite_id int primary key identity(1,1),
 food_id int not null,
-customer_id int not null
+username_custo varchar(50) not null
 )
 go
 create table dbo.foodDetail
@@ -92,8 +90,8 @@ go
 create table dbo.orders
 (
 order_id int primary key identity(1,1),
-account_id int not null,
-customer_id int not null,
+username varchar(50) not null,
+username_custo varchar(50) not null,
 orderDate date not null,
 discount int,
 status int not null,
@@ -116,8 +114,8 @@ references dbo.role(role_id)
 
 alter table dbo.authorized
 add constraint fk_au_acc
-foreign key(account_id)
-references dbo.account(account_id)
+foreign key(username)
+references dbo.account(username)
 
 alter table dbo.foodDetail
 add constraint fk_fd_fc
@@ -146,13 +144,13 @@ references dbo.food(food_id)
 
 alter table dbo.orders
 add constraint fk_orD_Acc
-foreign key (account_id)
-references dbo.Account(account_ID)
+foreign key (username)
+references dbo.Account(username)
 
 alter table dbo.orders
 add constraint fk_orD_Cus
-foreign key (customer_id)
-references dbo.customer(customer_id)
+foreign key (username_custo)
+references dbo.customer(username_custo)
 
 alter table dbo.favorite
 add constraint fk_fav_f
@@ -161,10 +159,9 @@ references dbo.food(food_id)
 
 alter table dbo.favorite
 add constraint fk_fav_cus
-foreign key (customer_id)
-references dbo.customer(customer_id)
+foreign key (username_custo)
+references dbo.customer(username_custo)
 
-select * from size
 
 ----
 --dbo.size
@@ -185,8 +182,6 @@ insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) v
 ('6','Fresh Fruits','no')
 SET IDENTITY_INSERT dbo.foodCategory OFF
 --dbo.food
-
-SET IDENTITY_INSERT dbo.foodCategory OFF
 SET IDENTITY_INSERT dbo.food ON
 insert into dbo.food (food_id, food_name, price, photo) values
 ('1','Chicken In Teriyaki','22.35','feature-item-1.jpg'),
@@ -205,58 +200,34 @@ insert into dbo.foodDetail (food_id, category_id, status, description, size_id, 
 ('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
 ('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
 ('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
-<<<<<<< HEAD
-SELECT * FROM foodDetail
-=======
 SET IDENTITY_INSERT dbo.foodDetail OFF
->>>>>>> b74d4fd20657da28c3f62f489b9207630fbc1955
 --dbo.customer
-SET IDENTITY_INSERT dbo.customer ON
-insert into dbo.customer (customer_id, username, password, fullName, phone_No, address, email, image) values
-<<<<<<< HEAD
-('1','vuongnm','123','Nguyen Minh Vuong','0375578180','Phan Thiet','vuongnm@gmail.com','vuongnm.jpg'),
-('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','dathx.jpg'),
-('3','phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','phucvh.jpg'),
-('4','phuocqd','123','Quach Diem Phuoc','0366533889','TP.HCM','phuocqd@gmail.com','phuocqd.jpg'),
-('5','ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','client-1.jpg'),
-('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','client-2.jpg'),
-('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','client-3.jpg'),
-('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','client-4.jpg')
-=======
-('1','vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
-('2','dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','photo.jpg'),
-('3','phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','photo.jpg'),
-('4','phuocqd','123','Quach Diem Phuoc','0375578184','TP.HCM','phuocqd@gmail.com','photo.jpg'),
-('5','ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','photo.jpg'),
-('6','phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','photo.jpg'),
-('7','liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','photo.jpg'),
-('8','chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','photo.jpg')
-SET IDENTITY_INSERT dbo.customer OFF
->>>>>>> b74d4fd20657da28c3f62f489b9207630fbc1955
+
+insert into dbo.customer (username_custo, password, fullName, phone_No, address, email, image) values
+('vuongnm','123','Nguyen Minh Vuong','0375578180','Phan Thiet','vuongnm@gmail.com','vuongnm.jpg'),
+('dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','dathx.jpg'),
+('phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','phucvh.jpg'),
+('phuocqd','123','Quach Diem Phuoc','0366533889','TP.HCM','phuocqd@gmail.com','phuocqd.jpg'),
+('ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','client-1.jpg'),
+('phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','client-2.jpg'),
+('liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','client-3.jpg'),
+('chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','client-4.jpg')
+
 --dbo.favorite
 SET IDENTITY_INSERT dbo.favorite ON
-insert into dbo.favorite(favorite_id, food_id, customer_id) values
-('1','1','1'),
-('2','1','2'),
-('3','2','1'),
-<<<<<<< HEAD
-('4','3','2'),
-('5','2','3'),
-('6','3','4'),
-('7','2','3'),
-('8','3','4')
-=======
-('4','3','1')
+insert into dbo.favorite(favorite_id, food_id, username_custo) values
+('1','1','vuongnm'),
+('2','1','dathx'),
+('3','2','vuongnm'),
+('4','3','vuongnm')
 SET IDENTITY_INSERT dbo.favorite OFF
->>>>>>> b74d4fd20657da28c3f62f489b9207630fbc1955
 --dbo.account
-SET IDENTITY_INSERT dbo.account ON
-insert into dbo.account (account_id, username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
-('1','nv01','123','Nguyen Van Can','cannv@gmail.com','2 District','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
-('2','nv02','123','Pham Van Kiem','liempv@gmail.com','12 District','0375578191','2017/05/05','2700','1','1998/04/25','photo.jpg'),
-('3','nv03','123','Tran Van Liem','liemtv@gmail.com','11 District','0375578192','2017/05/05','2300','1','1997/03/05','photo.jpg'),
-('4','nv04','123','Huynh Van Chinh','chinhhv@gmail.com','10 District','0375578193','2017/05/05','2200','1','1999/07/23','photo.jpg')
-SET IDENTITY_INSERT dbo.account OFF
+insert into dbo.account (username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
+('nv01','cannv','123','Nguyen Van Can','cannv@gmail.com','0375578190','2017/05/05','2500','1','1999/05/15','photo.jpg'),
+('nv02','liempv','123','Pham Van Kiem','liempv@gmail.com','0375578191','2017/05/05','2700','1','1998/04/25','photo.jpg'),
+('nv03','liemtv','123','Tran Van Liem','liemtv@gmail.com','0375578192','2017/05/05','2300','1','1997/03/05','photo.jpg'),
+('nv04','chinhhv','123','Huynh Van Chinh','chinhhv@gmail.com','0375578193','2017/05/05','2200','1','1999/07/23','photo.jpg')
+
 --dbo.role
 SET IDENTITY_INSERT dbo.role ON
 insert into dbo.role (role_id, role_name) values
@@ -267,20 +238,20 @@ insert into dbo.role (role_id, role_name) values
 SET IDENTITY_INSERT dbo.role OFF
 --dbo.authorized
 SET IDENTITY_INSERT dbo.authorized ON
-insert into dbo.authorized (authorized_id, account_id, role_id) values
-('1','1','1'),
-('2','2','2'),
-('3','3','3'),
-('4','4','4')
+insert into dbo.authorized (authorized_id, username, role_id) values
+('1','nv01','1'),
+('2','nv02','2'),
+('3','nv03','3'),
+('4','nv04','4')
 SET IDENTITY_INSERT dbo.authorized OFF
 --dbo.orders
 SET IDENTITY_INSERT dbo.orders ON
-insert into dbo.orders (order_id, account_id, customer_id, orderDate, discount, status, address) values
-('1','2','1','2021/09/29','10','1','HCM'),
-('2','2','2','2021/09/29','10','1','HCM'),
-('3','2','3','2021/09/29','5','1','HCM'),
-('4','2','4','2021/09/29','10','1','HCM'),
-('5','2','1','2021/09/29','20','1','HCM')
+insert into dbo.orders (order_id, username, username_custo, orderDate, discount, status, address) values
+('1','nv02','vuongnm','2021/09/29','10','1','HCM'),
+('2','nv02','dathx','2021/09/29','10','1','HCM'),
+('3','nv02','phuocqd','2021/09/29','5','1','HCM'),
+('4','nv02','phucvh','2021/09/29','10','1','HCM'),
+('5','nv02','vuongnm','2021/09/29','20','1','HCM')
 SET IDENTITY_INSERT dbo.orders OFF
 --dbo.orderDetail
 SET IDENTITY_INSERT dbo.orderDetail ON
@@ -290,13 +261,6 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 ('3','3','2','1','30.35'),
 ('4','4','2','1','30.35'),
 ('5','5','3','1','52.35')
-<<<<<<< HEAD
-
-select * from customer
-select * from favorite
-select * from foodDetail
-=======
 SET IDENTITY_INSERT dbo.orderDetail OFF
 
 
->>>>>>> b74d4fd20657da28c3f62f489b9207630fbc1955
