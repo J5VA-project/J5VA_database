@@ -90,9 +90,9 @@ go
 create table dbo.orders
 (
 order_id int primary key identity(1,1),
-username varchar(50) not null,
 username_custo varchar(50) not null,
 orderDate date not null,
+note nvarchar(500),
 discount int,
 status int not null,
 address nvarchar(255) not null
@@ -141,11 +141,6 @@ alter table dbo.orderDetail
 add constraint fk_orD_F
 foreign key (food_id)
 references dbo.food(food_id)
-
-alter table dbo.orders
-add constraint fk_orD_Acc
-foreign key (username)
-references dbo.Account(username)
 
 alter table dbo.orders
 add constraint fk_orD_Cus
@@ -246,12 +241,12 @@ insert into dbo.authorized (authorized_id, username, role_id) values
 SET IDENTITY_INSERT dbo.authorized OFF
 --dbo.orders
 SET IDENTITY_INSERT dbo.orders ON
-insert into dbo.orders (order_id, username, username_custo, orderDate, discount, status, address) values
-('1','nv02','vuongnm','2021/09/29','10','1','HCM'),
-('2','nv02','dathx','2021/09/29','10','1','HCM'),
-('3','nv02','phuocqd','2021/09/29','5','1','HCM'),
-('4','nv02','phucvh','2021/09/29','10','1','HCM'),
-('5','nv02','vuongnm','2021/09/29','20','1','HCM')
+insert into dbo.orders (order_id, username_custo, orderDate, discount, status, address,note) values
+('1','vuongnm','2021/09/29','10','1','HCM','none'),
+('2','dathx','2021/09/29','10','1','HCM','none'),
+('3','phuocqd','2021/09/29','5','1','HCM','none'),
+('4','phucvh','2021/09/29','10','1','HCM','none'),
+('5','vuongnm','2021/09/29','20','1','HCM','none')
 SET IDENTITY_INSERT dbo.orders OFF
 --dbo.orderDetail
 SET IDENTITY_INSERT dbo.orderDetail ON
