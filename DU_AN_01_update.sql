@@ -2,7 +2,11 @@ create database du_an_01
 go
 use du_an_01
 
+<<<<<<< HEAD:DU_AN_01_update.sql
 drop database du_an_01
+=======
+--drop database du_an_01
+>>>>>>> vuongnm:DU_AN_01.sql
 
 go
 create table dbo.customer
@@ -90,9 +94,13 @@ go
 create table dbo.orders
 (
 order_id int primary key identity(1,1),
+<<<<<<< HEAD:DU_AN_01_update.sql
 username varchar(50) not null,
+=======
+>>>>>>> vuongnm:DU_AN_01.sql
 username_custo varchar(50) not null,
 orderDate date not null,
+note nvarchar(500),
 discount int,
 status int not null,
 address nvarchar(255) not null
@@ -143,11 +151,14 @@ foreign key (food_id)
 references dbo.food(food_id)
 
 alter table dbo.orders
+<<<<<<< HEAD:DU_AN_01_update.sql
 add constraint fk_orD_Acc
 foreign key (username)
 references dbo.Account(username)
 
 alter table dbo.orders
+=======
+>>>>>>> vuongnm:DU_AN_01.sql
 add constraint fk_orD_Cus
 foreign key (username_custo)
 references dbo.customer(username_custo)
@@ -204,6 +215,7 @@ SET IDENTITY_INSERT dbo.foodDetail OFF
 --dbo.customer
 
 insert into dbo.customer (username_custo, password, fullName, phone_No, address, email, image) values
+<<<<<<< HEAD:DU_AN_01_update.sql
 ('vuongnm','123','Nguyen Minh Vuong','0375578180','Phan Thiet','vuongnm@gmail.com','vuongnm.jpg'),
 ('dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','dathx.jpg'),
 ('phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','phucvh.jpg'),
@@ -212,6 +224,16 @@ insert into dbo.customer (username_custo, password, fullName, phone_No, address,
 ('phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','client-2.jpg'),
 ('liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','client-3.jpg'),
 ('chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','client-4.jpg')
+=======
+('vuongnm','123','Nguyen Minh Vuong','0375578181','Phan Thiet','vuongnm@gmail.com','photo.jpg'),
+('dathx','123','Hoang Xuan Dat','0375578182','Dak Lak','dathx@gmail.com','photo.jpg'),
+('phucvh','123','Vu Hoang Phuc','0375578183','Dong Thap','phucvh@gmail.com','photo.jpg'),
+('phuocqd','123','Quach Diem Phuoc','0375578184','TP.HCM','phuocqd@gmail.com','photo.jpg'),
+('ngocnt','123','Nguyen Thi Ngoc','0375578185','Quang Nam','ngocnt@gmail.com','photo.jpg'),
+('phuongtt','123','Tran Thi Phuong','0375578186','Da Nang','phuongtt@gmail.com','photo.jpg'),
+('liemnv','123','Nguyen Van Liem','0375578187','Quang Ngai','liemnv@gmail.com','photo.jpg'),
+('chinhnv','123','Nguyen Van Chinh','0375578188','Hue','chinhnv@gmail.com','photo.jpg')
+>>>>>>> vuongnm:DU_AN_01.sql
 
 --dbo.favorite
 SET IDENTITY_INSERT dbo.favorite ON
@@ -246,12 +268,21 @@ insert into dbo.authorized (authorized_id, username, role_id) values
 SET IDENTITY_INSERT dbo.authorized OFF
 --dbo.orders
 SET IDENTITY_INSERT dbo.orders ON
+<<<<<<< HEAD:DU_AN_01_update.sql
 insert into dbo.orders (order_id, username, username_custo, orderDate, discount, status, address) values
 ('1','nv02','vuongnm','2021/09/29','10','1','HCM'),
 ('2','nv02','dathx','2021/09/29','10','1','HCM'),
 ('3','nv02','phuocqd','2021/09/29','5','1','HCM'),
 ('4','nv02','phucvh','2021/09/29','10','1','HCM'),
 ('5','nv02','vuongnm','2021/09/29','20','1','HCM')
+=======
+insert into dbo.orders (order_id, username_custo, orderDate, discount, status, address,note) values
+('1','vuongnm','2021/09/29','10','1','HCM','none'),
+('2','dathx','2021/09/29','10','1','HCM','none'),
+('3','phuocqd','2021/09/29','5','1','HCM','none'),
+('4','phucvh','2021/09/29','10','1','HCM','none'),
+('5','vuongnm','2021/09/29','20','1','HCM','none')
+>>>>>>> vuongnm:DU_AN_01.sql
 SET IDENTITY_INSERT dbo.orders OFF
 --dbo.orderDetail
 SET IDENTITY_INSERT dbo.orderDetail ON
