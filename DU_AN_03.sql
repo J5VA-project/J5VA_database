@@ -1,8 +1,7 @@
+drop database du_an_03
 create database du_an_03
 go
 use du_an_03
-
-drop database du_an_01
 
 go
 create table dbo.account
@@ -86,6 +85,7 @@ order_id int primary key identity(1,1),
 username varchar(50) not null,
 orderDate date not null,
 discount int,
+note nvarchar(255),
 status int not null,
 address nvarchar(255) not null
 )
@@ -227,12 +227,12 @@ insert into dbo.authorized (authorized_id, username, role_id) values
 SET IDENTITY_INSERT dbo.authorized OFF
 --dbo.orders
 SET IDENTITY_INSERT dbo.orders ON
-insert into dbo.orders (order_id,  username, orderDate, discount, status, address) values
-('1','phuocqd','2021/09/29','10','1','HCM'),
-('2','phucvh','2021/09/29','10','1','HCM'),
-('3','phuocqd','2021/09/29','5','1','HCM'),
-('4','phucvh','2021/09/29','10','1','HCM'),
-('5','phucvh','2021/09/29','20','1','HCM')
+insert into dbo.orders (order_id,  username, orderDate,note, discount, status, address) values
+('1','phuocqd','2021/09/29','','10','1','HCM'),
+('2','phucvh','2021/09/29','','10','1','HCM'),
+('3','phuocqd','2021/09/29','','5','1','HCM'),
+('4','phucvh','2021/09/29','','10','1','HCM'),
+('5','phucvh','2021/09/29','','20','1','HCM')
 SET IDENTITY_INSERT dbo.orders OFF
 --dbo.orderDetail
 SET IDENTITY_INSERT dbo.orderDetail ON
@@ -245,3 +245,5 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 SET IDENTITY_INSERT dbo.orderDetail OFF
 
 select * from dbo.account
+
+select * from dbo.authorized
