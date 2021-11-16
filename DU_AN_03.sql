@@ -1,7 +1,7 @@
 drop database du_an_03
-create database du_an_03
+create database du_an_05
 go
-use du_an_03
+use du_an_05
 
 go
 create table dbo.account
@@ -52,7 +52,7 @@ description nvarchar(255) not null
 go
 create table dbo.food
 (
-food_id int primary key identity(1,1),
+food_id int primary key ,
 food_name nvarchar(255) not null,
 price money not null,
 photo varchar(255)
@@ -69,7 +69,7 @@ username varchar(50) not null
 go
 create table dbo.foodDetail
 (
-food_id int primary key identity(1,1),
+food_id int primary key,
 category_id int not null,
 status bit not null,
 description nvarchar(255),
@@ -169,7 +169,6 @@ insert into dbo.foodCategory (foodCategory_id, foodCategory_name, description) v
 ('6','Fresh Fruits','no')
 SET IDENTITY_INSERT dbo.foodCategory OFF
 --dbo.food
-SET IDENTITY_INSERT dbo.food ON
 insert into dbo.food (food_id, food_name, price, photo) values
 ('1','Chicken In Teriyaki','22.35','feature-item-1.jpg'),
 ('2','Hotdog With Sausage','30.35','feature-item-2.jpg'),
@@ -177,9 +176,8 @@ insert into dbo.food (food_id, food_name, price, photo) values
 ('4','Grilled Chicken Stick','25.35','feature-item-4.jpg'),
 ('5','Chicken Barista platter','32.35','feature-item-5.jpg'),
 ('6','French Fries Pack','15.35','feature-item-6.jpg')
-SET IDENTITY_INSERT dbo.food OFF
+
 --dbo.foodDetail
-SET IDENTITY_INSERT dbo.foodDetail ON
 insert into dbo.foodDetail (food_id, category_id, status, description, size_id, image_title1, image_title2) values
 ('1','1','1','no','1','feature-item-1.jpg','feature-item-1.jpg'),
 ('2','1','1','no','2','feature-item-2.jpg','feature-item-2.jpg'),
@@ -187,7 +185,6 @@ insert into dbo.foodDetail (food_id, category_id, status, description, size_id, 
 ('4','5','1','no','2','feature-item-4.jpg','feature-item-4.jpg'),
 ('5','2','1','no','3','feature-item-5.jpg','feature-item-5.jpg'),
 ('6','5','1','no','3','feature-item-6.jpg','feature-item-6.jpg')
-SET IDENTITY_INSERT dbo.foodDetail OFF
 
 --dbo.account
 insert into dbo.account (username, password, fullname, email, address, phone, hire_date, salary, gender, birthdate, image) values
@@ -243,7 +240,13 @@ insert into dbo.orderDetail (orderDetail_id, order_id, food_id, quantity, price)
 ('4','4','2','1','30.35'),
 ('5','5','3','1','52.35')
 SET IDENTITY_INSERT dbo.orderDetail OFF
-
-select * from dbo.account
-
-select * from dbo.authorized
+GO
+CREATE    PROC  [dbo].[sp_FindRevenueByMonth](@Month int)
+	AS
+		BEGIN
+			SELECT SUM(ordD.quantity*ordD.price)
+			FROM dbo.orders ord inner join dbo.orderDetail ordD
+			ON ord.order_id = ordD.order_id
+			WHERE MONTH(ord.orderDate) = @Month and ord.status = 4
+	END;
+GO
