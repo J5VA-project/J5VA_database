@@ -1,4 +1,0 @@
-xoa account_id 
-xoa customer_id
-xoa table account
-them cot note trong bang orders
